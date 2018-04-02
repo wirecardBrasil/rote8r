@@ -33,7 +33,6 @@ public class RoutingService {
                     List<Mapping> result = rule.getPlatforms();
                     if (result != null) {
                         logger.info("Found matching rule: " + rule);
-//                        persistRoutingResult(result, paymentToRoute);
                         return result;
                     }
                 }
@@ -43,8 +42,10 @@ public class RoutingService {
         }
 
         logger.info("Could not find any matching rules, using default routing!");
-        List<Mapping> result = defaultRouting.defaultRouting(paymentToRoute);
-//        persistRoutingResult(result, paymentToRoute);
-        return result;
+        if (defaultRouting == null) {
+            logger.warn("No default routing supplied to rote8r!");
+            return null;
+        }
+        return defaultRouting.defaultRouting(paymentToRoute);
     }
 }
