@@ -1,0 +1,21 @@
+[
+  {
+    "name": "TESTE",
+    "precedence": 1,
+    "input": {
+      "string" : "strong"
+    },
+    "output": {
+      "platforms": [
+        {
+          "resultProp1" : "value1",
+          "resultProp2" : "value2"
+        },
+        {
+          "resultProp1" : "value3",
+          "resultProp2" : "value4"
+        }
+      ]
+    }
+  }
+]
