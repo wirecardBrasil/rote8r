@@ -1,10 +1,8 @@
 package br.com.moip.rote8r.routing.service
 
 import br.com.moip.rote8r.routing.models.Mapping
-import br.com.moip.rote8r.routing.repositories.JSONRuleRepository
-
-import java.nio.file.Files
-import java.nio.file.Paths
+import br.com.moip.rote8r.routing.models.RoutingOutput
+import br.com.moip.rote8r.routing.models.RoutingRule
 
 class RoutingServiceTest extends GroovyTestCase {
 
@@ -14,8 +12,7 @@ class RoutingServiceTest extends GroovyTestCase {
     }
 
     void testWithJSONRepository() {
-        String json = loadTestJson("simple_test.json")
-        def service = new RoutingService(new JSONRuleRepository(json))
+        def service = new RoutingService(new TestRepository())
 
         assertNull(service.route(new Mapping())) // empty input
         assertNull(service.route(new Mapping("string" : "strang"))) //input that doesn't match
@@ -29,14 +26,13 @@ class RoutingServiceTest extends GroovyTestCase {
     }
 
     void testWithDefaultRouting() {
-        String json = loadTestJson("simple_test.json")
         DefaultRouting defaultRouting = new DefaultRouting() {
             @Override
             List<Mapping> defaultRouting(Mapping paymentToRoute) {
                 return Arrays.asList(new Mapping(["resultProp1": "defaultValue1", "resultProp2": "defaultValue2"]))
             }
         }
-        def service = new RoutingService(new JSONRuleRepository(json), defaultRouting)
+        def service = new RoutingService(new TestRepository(), defaultRouting)
 
         def route = service.route(new Mapping()) // empty input
         assertEquals(1, route.size())
@@ -55,13 +51,27 @@ class RoutingServiceTest extends GroovyTestCase {
         assertEquals("value4", route.get(1).get("resultProp2"))
     }
 
-    String loadTestJson(String path) {
-        path = getClass().getClassLoader().getResource(path).getPath()
-        /*
-            magia preta... LOL \\A = "begin input"
-            Isso faz o Scanner pegar somente um token, que é a única ocorrência do begin.
-         */
-        def scanner = new Scanner(Files.newInputStream(Paths.get(path))).useDelimiter("\\A")
-        return scanner.next()
+}
+
+class TestRepository implements RoutingRuleRepository {
+
+    @Override
+    List<RoutingRule> findAllRulesInPrecedenceOrder() {
+        return new ArrayList<>(Arrays.asList(new RoutingRule(
+                name: "TESTE",
+                precedence: 1,
+                input: new Mapping(
+                        "string" : "strong"
+                ),
+                output: new RoutingOutput(
+                        new ArrayList<Mapping>(Arrays.asList(new Mapping(
+                                "resultProp1" : "value1",
+                                "resultProp2" : "value2"
+                        ), new Mapping(
+                                "resultProp1" : "value3",
+                                "resultProp2" : "value4"
+                        )))
+                )
+        )))
     }
 }

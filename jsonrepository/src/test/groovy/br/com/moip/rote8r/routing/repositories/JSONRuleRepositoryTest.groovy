@@ -1,7 +1,5 @@
 package br.com.moip.rote8r.routing.repositories
 
-import br.com.moip.rote8r.routing.repositories.JSONRuleRepository
-
 class JSONRuleRepositoryTest extends GroovyTestCase {
 
     void testEmptyJson() {
