@@ -1,5 +1,6 @@
 package br.com.moip.rote8r.routing.matcher
 
+import br.com.moip.rote8r.routing.matcher.Matcher
 import br.com.moip.rote8r.routing.models.Mapping
 
 class MatcherTest extends GroovyTestCase {

@@ -33,7 +33,7 @@ class RoutingServiceTest extends GroovyTestCase {
         DefaultRouting defaultRouting = new DefaultRouting() {
             @Override
             List<Mapping> defaultRouting(Mapping paymentToRoute) {
-                return Arrays.asList(new Mapping(["resultProp1" : "defaultValue1", "resultProp2" : "defaultValue2"]))
+                return Arrays.asList(new Mapping(["resultProp1": "defaultValue1", "resultProp2": "defaultValue2"]))
             }
         }
         def service = new RoutingService(new JSONRuleRepository(json), defaultRouting)
