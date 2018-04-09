@@ -14,6 +14,25 @@
         <module>mongorepository</module>
     </modules>
 
+    <scm>
+        <connection>scm:git:ssh://git@github.com/moip/rote8r.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/moip/rote8r.git</developerConnection>
+        <tag>rote8r-1.0</tag>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>central</id>
+            <name>moip-snapshots</name>
+            <url>https://moip.artifactoryonline.com/moip/libs-snapshot-local</url>
+        </snapshotRepository>
+        <repository>
+            <id>central</id>
+            <name>moip-releases</name>
+            <url>https://moip.artifactoryonline.com/moip/libs-release-local</url>
+        </repository>
+    </distributionManagement>
+
     <dependencies>
         <!-- TESTS -->
         <dependency>
@@ -80,6 +99,12 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5</version>
             </plugin>
         </plugins>
     </build>
