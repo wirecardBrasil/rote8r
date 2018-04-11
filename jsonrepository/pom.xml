@@ -3,7 +3,7 @@
     <parent>
         <artifactId>rote8r</artifactId>
         <groupId>br.com.moip.rote8r</groupId>
-        <version>1.0.2</version>
+        <version>1.0.3-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -13,7 +13,7 @@
         <dependency>
             <groupId>br.com.moip.rote8r</groupId>
             <artifactId>core</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.3-SNAPSHOT</version>
         </dependency>
 
         <dependency>
