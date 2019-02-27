@@ -49,6 +49,15 @@ You also define what is the output, so in the example above the "ACQUIRER1" acqu
 You can also return more than one result; this is useful when you wish to implement retrying in case a provider fails.
 In this case you have to prepare your application to correctly handle the possibility of multiple results.
 
+## Matching capabilities
+
+You can match values by:
+- Exact value (e.g. `amount: 1000`)
+- Number range (lower / upper / both) (e.g. `amount: "1000.."` or `amount: "..2000"` or `amount: "1000..2000"`)
+- List (contains value) (e.g. `amount: [1000, 2000])
+
+Values can be booleans `true / false`, numbers `1000 / 20.0` or Strings `"OPTION1" / "OPTION2"`
+
 ## Repositories
 
 Rote8r comes with a JsonRepository to read rules from JSON files, and a MongoRepository that uses Spring Data to read rules from MongoDB. 
