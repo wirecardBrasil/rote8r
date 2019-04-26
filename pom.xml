@@ -5,7 +5,7 @@
     <groupId>br.com.moip.rote8r</groupId>
     <artifactId>rote8r</artifactId>
     <packaging>pom</packaging>
-    <version>1.1.0</version>
+    <version>1.1.1-SNAPSHOT</version>
     <modules>
         <module>core</module>
         <module>jsonrepository</module>
@@ -15,7 +15,7 @@
     <scm>
         <connection>scm:git:ssh://git@github.com/moip/rote8r.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/moip/rote8r.git</developerConnection>
-        <tag>rote8r-1.1.0</tag>
+        <tag>rote8r-1.0</tag>
     </scm>
 
     <distributionManagement>
