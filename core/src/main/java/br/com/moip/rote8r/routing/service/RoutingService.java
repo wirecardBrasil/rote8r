@@ -26,13 +26,13 @@ public class RoutingService {
         this.defaultRouting = defaultRouting;
     }
 
-    public List<Mapping> route(Mapping toRoute) {
+    public RoutingRule route(Mapping toRoute) {
         logger.info("Trying to determine route for mapping: " + toRoute);
         if (routingRuleRepository == null) {
             logger.warn("No routingRuleRepository supplied to rote8r!");
             return null;
         }
-        List<Mapping> result = findMatchingRule(toRoute);
+        RoutingRule result = findMatchingRule(toRoute);
         if (result != null) return result;
 
         logger.info("Could not find any matching rules, using default routing!");
@@ -43,18 +43,15 @@ public class RoutingService {
         return defaultRouting.defaultRouting(toRoute);
     }
 
-    private List<Mapping> findMatchingRule(Mapping toRoute) {
+    private RoutingRule findMatchingRule(Mapping toRoute) {
         try {
             List<RoutingRule> allRules = routingRuleRepository.findAllRulesInPrecedenceOrder();
 
             for (RoutingRule rule : allRules) {
                 logger.debug("Checking if rule matches: " + rule);
                 if (rule.matches(toRoute)) {
-                    List<Mapping> result = rule.getPlatforms();
-                    if (result != null) {
-                        logger.info("Found matching rule: " + rule);
-                        return result;
-                    }
+                    logger.info("Found matching rule: " + rule);
+                    return rule;
                 }
             }
         } catch (Exception e) {

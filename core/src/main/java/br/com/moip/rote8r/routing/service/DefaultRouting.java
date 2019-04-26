@@ -1,6 +1,7 @@
 package br.com.moip.rote8r.routing.service;
 
 import br.com.moip.rote8r.routing.models.Mapping;
+import br.com.moip.rote8r.routing.models.RoutingRule;
 
 import java.util.List;
 
@@ -9,6 +10,6 @@ import java.util.List;
  */
 public interface DefaultRouting {
 
-    List<Mapping> defaultRouting(Mapping paymentToRoute);
+    RoutingRule defaultRouting(Mapping paymentToRoute);
 
 }
